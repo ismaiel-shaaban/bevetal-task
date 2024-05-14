@@ -219,7 +219,7 @@ button {
 /* CARD BACKGROUNDS */
 
 .card-1 {
-  background: radial-gradient(#007b86, #3fbafe);
+  background: radial-gradient(#007b8654,#151f31);
 }
 
 
