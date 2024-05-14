@@ -63,13 +63,7 @@ export default defineComponent({
             }
         });
 
-        // Watch for changes in tasks and execute handleSubmit when tasks has a valid value
-        watch(tasks, (newTasks, oldTasks) => {
-            if (newTasks && newTasks !== oldTasks) {
-                handleSubmit();
-            }
-        });
-
+      
         const handleSubmit = () => {
             // Ensure tasks has a valid value before accessing it
             const existingTask = tasks.value.find((t) => t.id === formData.value.id);

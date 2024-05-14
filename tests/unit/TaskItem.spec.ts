@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import TaskItem from '@/components/TaskItem.vue';
-import { mockStore } from './mockStore'; // Import the mock store
+import { mockStore } from './mockStore'; 
 
 describe('TaskItem', () => {
   it('renders task details correctly', () => {
@@ -14,7 +14,7 @@ describe('TaskItem', () => {
     const wrapper = mount(TaskItem, {
       props: { taskItem: task },
       global: {
-        plugins: [mockStore], // Provide the mock store
+        plugins: [mockStore], 
       },
     });
 
@@ -34,11 +34,11 @@ describe('TaskItem', () => {
     const wrapper = mount(TaskItem, {
       props: { taskItem: task },
       global: {
-        plugins: [mockStore], // Provide the mock store
+        plugins: [mockStore], 
       },
     });
 
-    await wrapper.find('button[aria-label="Edit"]').trigger('click'); // Target edit button by aria-label
+    await wrapper.find('button[aria-label="Edit"]').trigger('click'); 
     expect(wrapper.emitted('edit')).toHaveLength(1);
     expect(wrapper.emitted('edit')![0]).toEqual([task]);
   });

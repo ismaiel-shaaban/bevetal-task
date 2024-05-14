@@ -1,13 +1,13 @@
 import { mount } from '@vue/test-utils';
 import TaskForm from '@/components/TaskForm.vue';
-import { mockStore } from './mockStore'; // Import the mock store
+import { mockStore } from './mockStore'; 
 
 describe('TaskForm', () => {
   it('renders correctly', () => {
     const wrapper = mount(TaskForm, {
       global: {
         provide: {
-          store: mockStore, // Provide the mock store
+          store: mockStore, 
         },
       },
     });
@@ -18,7 +18,7 @@ describe('TaskForm', () => {
     const wrapper = mount(TaskForm, {
       global: {
         provide: {
-          store: mockStore, // Provide the mock store
+          store: mockStore, 
         },
       },
     });
@@ -35,7 +35,7 @@ describe('TaskForm', () => {
     const wrapper = mount(TaskForm, {
       global: {
         provide: {
-          store: mockStore, // Provide the mock store
+          store: mockStore, 
         },
       },
     });
@@ -61,5 +61,5 @@ describe('TaskForm', () => {
     ]);
   });
 
-  // Add more test cases as needed
+  
 });
