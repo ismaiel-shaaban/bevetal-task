@@ -1,5 +1,5 @@
 <template>
-  <div class="task-item card-1 card">
+  <div class="task-item card-1 card" draggable="true" @dragstart="handleDragStart" @dragover="handleDragOver" @drop="handleDrop">
     <h3>{{ taskItem?.title }}</h3>
     <p>{{ taskItem?.description }}</p>
     <p>Status: {{ taskItem?.status }}</p>
@@ -65,11 +65,43 @@ export default defineComponent({
     const editTask = () => {
       emit('edit', props.taskItem);
     }
+    const handleDragStart = (event: DragEvent) => {
+      const target = event.target as HTMLElement;
+      target.classList.add('dragging');
+      const index = Array.from(target.parentNode!.children).indexOf(target);
+      store.commit('SET_DRAGGED_TASK_INDEX', index);
+    };
+
+    const handleDragOver = (event: DragEvent) => {
+      event.preventDefault();
+    };
+
+    const handleDrop = (event: DragEvent) => {
+      console.log('llllllllllllll');
+      
+      const target = event.target as HTMLElement;
+      const draggedTaskIndex = store.state.draggedTaskIndex;
+      if (draggedTaskIndex !== null) {
+        const droppedTaskIndex = Array.from(target.parentNode!.children).indexOf(target);
+        store.commit('REARRANGE_TASKS', rearrangeTasks(store.state.tasks, draggedTaskIndex, droppedTaskIndex));
+        target.classList.remove('dragging');
+      }
+    };
+
+    const rearrangeTasks = (tasks: TaskType[], fromIndex: number, toIndex: number) => {
+      const result = [...tasks];
+      const [removed] = result.splice(fromIndex, 1);
+      result.splice(toIndex, 0, removed);
+      return result;
+    };
 
     return {
       deleteTask,
       toggleStatus,
-      editTask
+      editTask,
+      handleDragStart,
+      handleDragOver,
+      handleDrop
     };
   },
 

@@ -7,11 +7,13 @@ const loadTasksFromLocalStorage = (): Task[] => {
 };
 export interface State {
   tasks: Task[];
+  draggedTaskIndex: number | null;
 }
 
 const store = createStore<State>({
   state: {
-    tasks: loadTasksFromLocalStorage()
+    tasks: loadTasksFromLocalStorage(),
+    draggedTaskIndex: null
   },
   mutations: {
     ADD_TASK(state, task: Task) {
@@ -35,6 +37,13 @@ const store = createStore<State>({
       if (index !== -1) {
         state.tasks[index] = { ...editedTask };
       }
+    },
+    SET_DRAGGED_TASK_INDEX(state, index: number) { // Mutation to set the draggedTaskIndex
+      state.draggedTaskIndex = index;
+    },
+    REARRANGE_TASKS(state, tasks: Task[]) { // Mutation to rearrange tasks based on dragged task
+      state.tasks = tasks;
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     }
   },
   actions: {
