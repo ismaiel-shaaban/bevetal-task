@@ -130,10 +130,10 @@ export default defineComponent({
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: white;
+  background-color: #10626a54;
   cursor: pointer;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  color: #000;
+  color: white;
   font-weight: bold;
   font-size: 16px;
   text-align: center;
