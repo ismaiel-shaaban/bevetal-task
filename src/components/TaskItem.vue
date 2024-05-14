@@ -47,7 +47,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const store = useStore<State>();
     const deleteTask = (task: TaskType | undefined) => {
-      console.log('Delete task function called with task:', task);
+     
       
       if (task) {
         store.dispatch('deleteTask', task.id);
@@ -57,7 +57,7 @@ export default defineComponent({
     }
     const toggleStatus = (task: TaskType | undefined) => {
       if (task) {
-        console.log(task);
+       
 
         store.dispatch('toggleStatus', task.id);
       } else {
@@ -79,8 +79,6 @@ export default defineComponent({
     };
 
     const handleDrop = (event: DragEvent) => {
-      console.log('llllllllllllll');
-      
       const target = event.target as HTMLElement;
       const draggedTaskIndex = store.state.draggedTaskIndex;
       if (draggedTaskIndex !== null) {

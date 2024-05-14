@@ -43,24 +43,22 @@ describe('TaskItem', () => {
     expect(wrapper.emitted('edit')![0]).toEqual([task]);
   });
 
-  // it('emits delete event when delete button is clicked', async () => {
-  //   const task = {
-  //     id: 1,
-  //     title: 'Test Task',
-  //     description: 'This is a test task',
-  //     status: 'todo',
-  //     completed: false,
-  //   };
-  //   const wrapper = mount(TaskItem, {
-  //     props: { taskItem: task },
-  //     global: {
-  //       plugins: [mockStore], // Provide the mock store
-  //     },
-  //   });
+  it('emits delete event when delete button is clicked', async () => {
+    const task = {
+      id: 1,
+      title: 'Test Task',
+      description: 'This is a test task',
+      status: 'todo',
+      completed: false,
+    };
+    const wrapper = mount(TaskItem, {
+      props: { taskItem: task },
+      global: {
+        plugins: [mockStore], 
+      },
+    });
   
-  //   await wrapper.find('button[aria-label="Delete"]').trigger('click');
-  //   console.log('Emitted events:', wrapper.emitted());
-  //   expect(wrapper.emitted('delete')).toHaveLength(1);
-  //   expect(wrapper.emitted('delete')![0]).toEqual([task]);
-  // });
+    await wrapper.find('button[aria-label="Delete"]').trigger('click');
+    expect(mockStore.state.tasks).toHaveLength(0);
+  });
 });

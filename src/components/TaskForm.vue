@@ -1,7 +1,7 @@
 <template>
     <div class="task-form">
         <h2>{{ formTitle }}</h2>
-        <form @submit.prevent="handleSubmit" class="form-parent" aria-label="formTask">
+        <form @submit.prevent="handleSubmit" class="form-parent">
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" id="title" v-model="formData.title" required>
@@ -20,7 +20,7 @@
             </div>
             <div class="btn-container">
 
-                <button type="submit">{{ submitButtonText }}</button>
+                <button  aria-label="formTask" type="submit">{{ submitButtonText }}</button>
                 <!-- <button type="button">close</button> -->
             </div>
         </form>
