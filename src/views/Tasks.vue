@@ -13,6 +13,7 @@
     <div class="tasksParent">
       <TaskItem v-for="taskItem in tasks" :key="taskItem.id" :taskItem="taskItem" @edit="handleEditTask" />
     </div>
+    <div class="no-tasks" v-if="tasks.length ==0">ther is no tasks yet ....!! </div>
   </div>
 </template>
 
@@ -137,5 +138,12 @@ export default defineComponent({
   font-size: 16px;
   text-align: center;
   
+}
+
+.no-tasks{
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  color: #b87f7f;
 }
 </style>
