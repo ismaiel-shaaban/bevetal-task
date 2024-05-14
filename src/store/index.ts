@@ -1,6 +1,7 @@
 import { createStore, Store } from 'vuex';
 import { ActionContext } from 'vuex';
 import { Task  } from '../types/types'; 
+import { InjectionKey } from 'vue';
 const loadTasksFromLocalStorage = (): Task[] => {
   const tasksJson = localStorage.getItem('tasks');
   return tasksJson ? JSON.parse(tasksJson) : [];
@@ -9,7 +10,7 @@ export interface State {
   tasks: Task[];
   draggedTaskIndex: number | null;
 }
-
+export const storeKey: InjectionKey<Store<State>> = Symbol('store');
 const store = createStore<State>({
   state: {
     tasks: loadTasksFromLocalStorage(),

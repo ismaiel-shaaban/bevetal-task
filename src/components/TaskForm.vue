@@ -1,7 +1,7 @@
 <template>
     <div class="task-form">
         <h2>{{ formTitle }}</h2>
-        <form @submit.prevent="handleSubmit" class="form-parent">
+        <form @submit.prevent="handleSubmit" class="form-parent" aria-label="formTask">
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" id="title" v-model="formData.title" required>
@@ -32,9 +32,11 @@ import { computed, defineComponent, ref, watch } from 'vue';
 import { Task } from '../types/types';
 import { useStore } from 'vuex';
 import { State } from '@/store';
+
 function generateRandomId(): number {
     return Math.floor(Math.random() * 1000000);
 }
+
 export default defineComponent({
     props: {
         formTitle: String,
@@ -53,15 +55,23 @@ export default defineComponent({
             status: 'todo',
             completed: false,
         });
+
+        // Watch for changes in the editableTask prop and update formData accordingly
         watch(() => props.editableTask, (newValue) => {
-            console.log(newValue);
-            
             if (newValue) {
                 formData.value = { ...newValue };
             }
         });
 
+        // Watch for changes in tasks and execute handleSubmit when tasks has a valid value
+        watch(tasks, (newTasks, oldTasks) => {
+            if (newTasks && newTasks !== oldTasks) {
+                handleSubmit();
+            }
+        });
+
         const handleSubmit = () => {
+            // Ensure tasks has a valid value before accessing it
             const existingTask = tasks.value.find((t) => t.id === formData.value.id);
             if (existingTask) {
                 store.dispatch('editTask', formData.value)
@@ -73,7 +83,7 @@ export default defineComponent({
                             status: 'todo',
                             completed: false,
                         };
-                    })
+                    });
             } else {
                 store.dispatch('addTask', formData.value)
                     .then(() => {
@@ -84,19 +94,15 @@ export default defineComponent({
                             status: 'todo',
                             completed: false,
                         };
-                    })
+                    });
             }
-
-
-
-
         };
-
 
         return { formData, handleSubmit };
     }
 });
 </script>
+
 
 
 <style lang="scss" scoped>
